@@ -1,6 +1,6 @@
 ﻿import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Barcode, Search, Camera, CameraOff, ExternalLink, RotateCcw } from "lucide-react";
+import { Barcode, Search, Camera, CameraOff, Download, RotateCcw } from "lucide-react";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -16,6 +16,15 @@ declare global {
       detect(source: HTMLVideoElement): Promise<{ rawValue: string }[]>;
     };
   }
+}
+
+function toDownloadUrl(link: string): string {
+  const fileId =
+    link.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)?.[1] ||
+    link.match(/[?&]id=([a-zA-Z0-9_-]+)/)?.[1];
+  return fileId
+    ? `https://drive.google.com/uc?export=download&id=${fileId}`
+    : link;
 }
 
 export default function KalhareTestProduct() {
@@ -236,12 +245,11 @@ export default function KalhareTestProduct() {
               <div className="h-px bg-gold/12" />
 
               <a
-                href={result.drive_link}
-                target="_blank"
-                rel="noreferrer"
+                href={toDownloadUrl(result.drive_link)}
+                download
                 className="flex items-center justify-center gap-3 bg-gold text-ink text-xs font-body font-bold tracking-[0.2em] uppercase px-6 py-3.5 hover:bg-white transition-colors duration-300 w-full"
               >
-                <ExternalLink size={13} /> Open Drive Document
+                <Download size={13} /> Download Document
               </a>
 
               <button
