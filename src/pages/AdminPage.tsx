@@ -73,8 +73,10 @@ export default function AdminPage() {
         setErrorMsg(err.error || "Failed to save.");
         setSaveState("error");
       }
-    } catch {
-      setErrorMsg("Network error — check connection.");
+    } catch (e) {
+      setErrorMsg(e instanceof SyntaxError
+        ? "API unreachable — add DATABASE_URL in Vercel → Settings → Environment Variables, then redeploy."
+        : "Network error — check connection.");
       setSaveState("error");
     }
     setSaving(false);
