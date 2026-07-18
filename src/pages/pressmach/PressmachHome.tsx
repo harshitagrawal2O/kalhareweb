@@ -419,8 +419,8 @@ export default function PressmachHome() {
               className="aspect-[4/5] overflow-hidden"
             >
               <img
-                src="/images/pressmach/factory-floor.jpeg"
-                alt="Pressmach factory"
+                src="/images/pressmach/machine-studio-black.png"
+                alt="Pressmach EDM machine"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-ink/10" />
