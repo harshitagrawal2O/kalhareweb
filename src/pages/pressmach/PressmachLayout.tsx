@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "/pressmach" },
+  { label: "Home", href: "/" },
   { label: "About", href: "/pressmach/about" },
   { label: "Machines", href: "/pressmach/machines" },
   { label: "Custom Machines", href: "/pressmach/custom" },
@@ -35,11 +35,13 @@ function PressmachNav() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center group">
-          <img
-            src="/images/pressmach-logo.png"
-            alt="Pressmach Machine Tools"
-            className="h-10 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-          />
+          <div className="rounded-lg bg-white/95 px-2.5 py-1.5 group-hover:bg-white transition-colors duration-300">
+            <img
+              src="/images/pressmach-logo.png"
+              alt="Pressmach Machine Tools"
+              className="h-9 md:h-11 w-auto object-contain"
+            />
+          </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -47,7 +49,7 @@ function PressmachNav() {
             <NavLink
               key={link.href}
               to={link.href}
-              end={link.href === "/pressmach"}
+              end={link.href === "/"}
               className={({ isActive }) =>
                 `relative text-sm font-body font-medium tracking-wide transition-colors duration-300 pb-0.5
                 ${isActive ? "text-gold" : "text-white/80 hover:text-white"}`
@@ -88,7 +90,7 @@ function PressmachNav() {
           >
             <nav className="flex flex-col px-6 py-6 gap-5">
               {navLinks.map((link) => (
-                <NavLink key={link.href} to={link.href} end={link.href === "/pressmach"}
+                <NavLink key={link.href} to={link.href} end={link.href === "/"}
                   className={({ isActive }) => `text-base font-body tracking-wide ${isActive ? "text-gold" : "text-white/80"}`}
                 >
                   {link.label}
