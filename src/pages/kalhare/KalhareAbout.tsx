@@ -12,9 +12,9 @@ const fadeUp = {
 };
 
 const certifications = [
-  "IS 1180 — Distribution Transformers",
-  "IS 2026 — Power Transformers",
-  "IEC 60076 — International Standard",
+  "IS 1180: Distribution Transformers",
+  "IS 2026: Power Transformers",
+  "IEC 60076: International Standard",
   "BIS Certified Manufacturing",
   "ISO Quality Management System",
   "CE Marked Products Available",
@@ -22,7 +22,7 @@ const certifications = [
 
 const milestones = [
   { year: "1990s", event: "Founded in Kachohalli Industrial Area, Bangalore. First workshop, first winding machine." },
-  { year: "2000s", event: "Expanded to three-phase transformer range. Capacity grows to 5 KVA – 500 KVA." },
+  { year: "2000s", event: "Expanded to three-phase transformer range. Capacity reaches 5 KVA to 500 KVA." },
   { year: "2010s", event: "BIS certification obtained. 1,000+ transformers dispatched annually. IS/IEC compliant." },
   { year: "2020s", event: "Expanded to high-voltage range up to 2000 KVA. Custom configurator launched." },
 ];
@@ -118,10 +118,10 @@ export default function KalhareAbout() {
               Kalhare Enterprises was established with a single mission: to manufacture transformers that engineers and operators could trust without reservation. Located in the heart of Bangalore's Kachohalli Industrial Area, we have grown from a small workshop to a full-scale precision manufacturing facility.
             </motion.p>
             <motion.p {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.25 }} className="text-white/35 font-body font-light text-base leading-relaxed mb-8">
-              Our range spans single-phase and three-phase transformers, inductors, chokes, and custom specialty units — all manufactured with the same attention to winding precision, core quality, and insulation integrity.
+              Our range spans single-phase and three-phase transformers, inductors, chokes, and custom specialty units, all manufactured with the same attention to winding precision, core quality, and insulation integrity.
             </motion.p>
             <motion.p {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.3 }} className="text-white/35 font-body font-light text-base leading-relaxed">
-              Serving clients across Karnataka, Tamil Nadu, Maharashtra, and international markets — delivering transformers that reflect the very best of Indian engineering capability.
+              Serving clients across Karnataka, Tamil Nadu, Maharashtra, and international markets, delivering transformers that reflect the very best of Indian engineering capability.
             </motion.p>
           </div>
           <div className="relative">

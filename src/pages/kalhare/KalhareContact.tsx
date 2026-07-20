@@ -59,11 +59,11 @@ export default function KalhareContact() {
               <div>
                 <p className="text-gold/60 text-xs tracking-[0.4em] uppercase font-body mb-6">Our Office</p>
                 {[
-                  { Icon: MapPin, label: "Address", lines: ["No. 9/2, Kachohalli,", "Off Magadi Road,", "Bangalore – 560091, Karnataka"] },
+                  { Icon: MapPin, label: "Address", lines: ["No. 9/2, Kachohalli,", "Off Magadi Road,", "Bangalore 560091, Karnataka"] },
                   { Icon: Phone, label: "Phone", lines: ["+91 9008189732"] },
                   { Icon: Mail, label: "Email", lines: ["kalhare@gmail.com"] },
                   { Icon: Clock, label: "Business Timings", lines: ["Open 24x7 for Enquiries"] },
-                  { Icon: Clock, label: "Working Hours", lines: ["Mon–Sat: 9:00 AM – 6:30 PM", "Closed on Sundays & Public Holidays"] },
+                  { Icon: Clock, label: "Working Hours", lines: ["Mon-Sat: 9:00 AM to 6:30 PM", "Closed on Sundays & Public Holidays"] },
                 ].map(({ Icon, label, lines }) => (
                   <motion.div key={label} {...fadeUp} className="flex gap-5 py-5 border-b border-gold/8">
                     <div className="w-9 h-9 border border-gold/20 flex items-center justify-center shrink-0">

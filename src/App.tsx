@@ -16,6 +16,7 @@ import PressmachAbout from "./pages/pressmach/PressmachAbout";
 import PressmachMachines from "./pages/pressmach/PressmachMachines";
 import PressmachCustom from "./pages/pressmach/PressmachCustom";
 import PressmachContact from "./pages/pressmach/PressmachContact";
+import PressmachTestProduct from "./pages/pressmach/PressmachTestProduct";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -49,6 +50,7 @@ function AnimatedRoutes() {
             <Route path="machines" element={<PressmachMachines />} />
             <Route path="custom" element={<PressmachCustom />} />
             <Route path="contact" element={<PressmachContact />} />
+            <Route path="testproduct" element={<PressmachTestProduct />} />
           </Route>
         </Routes>
       </motion.div>

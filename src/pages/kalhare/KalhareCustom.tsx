@@ -245,11 +245,11 @@ export default function KalhareCustom() {
                   <p className="text-gold/60 text-xs tracking-[0.3em] uppercase font-body mb-4">Your Requirements Summary</p>
                   <div className="grid grid-cols-2 gap-3 text-sm font-body">
                     {[
-                      ["Type", transformerTypes.find(t => t.id === form.type)?.label || "—"],
-                      ["Phase", phaseOptions.find(p => p.id === form.phase)?.label || "—"],
-                      ["KVA", form.kva || "—"],
-                      ["Primary V", form.primaryV || "—"],
-                      ["Secondary V", form.secondaryV || "—"],
+                      ["Type", transformerTypes.find(t => t.id === form.type)?.label || "-"],
+                      ["Phase", phaseOptions.find(p => p.id === form.phase)?.label || "-"],
+                      ["KVA", form.kva || "-"],
+                      ["Primary V", form.primaryV || "-"],
+                      ["Secondary V", form.secondaryV || "-"],
                       ["Qty", form.qty || "1"],
                     ].map(([k, v]) => (
                       <div key={k}>
@@ -301,27 +301,27 @@ export default function KalhareCustom() {
                   const phaseName = phaseOptions.find(p => p.id === form.phase)?.label || form.phase || "Not specified";
                   const mountName = mountingOptions.find(m => m.id === form.mounting)?.label || form.mounting || "Not specified";
                   const msg = [
-                    "*Custom Transformer Enquiry — Kalhare Enterprises*",
+                    "*Custom Transformer Enquiry - Kalhare Enterprises*",
                     "",
                     `*Type:* ${typeName}`,
                     `*Phase:* ${phaseName}`,
-                    `*KVA:* ${form.kva || "—"}`,
-                    `*Primary Voltage:* ${form.primaryV || "—"}`,
-                    `*Secondary Voltage:* ${form.secondaryV || "—"}`,
+                    `*KVA:* ${form.kva || "-"}`,
+                    `*Primary Voltage:* ${form.primaryV || "-"}`,
+                    `*Secondary Voltage:* ${form.secondaryV || "-"}`,
                     `*Frequency:* ${form.frequency} Hz`,
-                    `*Cooling:* ${form.cooling || "—"}`,
-                    `*Enclosure:* ${form.enclosure || "—"}`,
+                    `*Cooling:* ${form.cooling || "-"}`,
+                    `*Enclosure:* ${form.enclosure || "-"}`,
                     `*Mounting:* ${mountName}`,
-                    `*Application:* ${form.application || "—"}`,
+                    `*Application:* ${form.application || "-"}`,
                     `*Quantity:* ${form.qty}`,
-                    `*Timeline:* ${form.timeline || "—"}`,
-                    `*Certifications:* ${form.certReq || "—"}`,
+                    `*Timeline:* ${form.timeline || "-"}`,
+                    `*Certifications:* ${form.certReq || "-"}`,
                     "",
                     "*Contact Details*",
                     `*Name:* ${form.name}`,
-                    `*Company:* ${form.company || "—"}`,
+                    `*Company:* ${form.company || "-"}`,
                     `*Email:* ${form.email}`,
-                    `*Phone:* ${form.phone || "—"}`,
+                    `*Phone:* ${form.phone || "-"}`,
                     ...(form.notes ? ["", `*Notes:* ${form.notes}`] : []),
                   ].join("\n");
                   window.open(`https://wa.me/918299721019?text=${encodeURIComponent(msg)}`, "_blank");

@@ -1,9 +1,16 @@
-﻿import { useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, Zap, Award, Settings, ShieldCheck } from "lucide-react";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+// Hero wordmark: the tight leading-[0.95] is smaller than Playfair's glyph height,
+// so the overflow-hidden reveal masks would clip ascenders/descenders. We pad each
+// line inward for breathing room, then cancel that padding with a matching negative
+// margin so the stacked spacing stays identical. em-based so it scales with the clamp.
+const HERO_FONT = "clamp(2.25rem, 9vw, 9rem)";
+const HERO_CLIP_PAD = 0.25; // em of room inside each reveal mask
 
 const fadeUp = {
   initial: { opacity: 0, y: 50 },
@@ -20,11 +27,72 @@ const stats = [
 ];
 
 const products = [
-  { num: "01", name: "Power Transformers", spec: "0.5 KVA – 2000 KVA", img: "/images/kalhare/product-power-transformer.png" },
+  { num: "01", name: "Power Transformers", spec: "0.5 KVA to 2000 KVA", img: "/images/kalhare/product-power-transformer.png" },
   { num: "02", name: "Application Specific", spec: "Inverter, Battery, UPS", img: "/images/kalhare/product-application-specific.png" },
   { num: "03", name: "Electronics Grade", spec: "PCB Mount, Pulse, Precision", img: "/images/kalhare/product-electronics-grade.png" },
-  { num: "04", name: "Magnetic Components", spec: "Inductors, Chokes, Reactors", img: "/images/kalhare/product-magnetic-components.png" },
+  { num: "04", name: "Magnetic Components", spec: "Inductors, Chokes, Reactors", img: "/images/kalhare/product-magnetic-components.jpeg" },
 ];
+
+// Plays the hero clip forward, then smoothly reverses back to the start and
+// loops, so the exploded-view animation assembles and disassembles on repeat.
+function usePingPongVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let rafId = 0;
+    let rate = 1;
+    let cancelled = false;
+
+    const playForward = () => {
+      el.playbackRate = rate;
+      el.play().catch(() => {});
+    };
+
+    const playReverse = () => {
+      el.pause();
+      let last = performance.now();
+      const step = (now: number) => {
+        if (cancelled) return;
+        const dt = (now - last) / 1000;
+        last = now;
+        el.currentTime = Math.max(0, el.currentTime - dt * rate);
+        if (el.currentTime <= 0.03) {
+          el.currentTime = 0;
+          playForward();
+        } else {
+          rafId = requestAnimationFrame(step);
+        }
+      };
+      rafId = requestAnimationFrame(step);
+    };
+
+    const handleLoadedMetadata = () => {
+      if (el.duration && isFinite(el.duration)) {
+        // Stretch one forward pass to take exactly 1 second longer.
+        rate = el.duration / (el.duration + 1);
+      }
+      playForward();
+    };
+
+    const handleEnded = () => playReverse();
+
+    el.addEventListener("loadedmetadata", handleLoadedMetadata);
+    el.addEventListener("ended", handleEnded);
+    if (el.readyState >= 1) handleLoadedMetadata();
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(rafId);
+      el.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      el.removeEventListener("ended", handleEnded);
+    };
+  }, []);
+
+  return ref;
+}
 
 export default function KalhareHome() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -32,14 +100,22 @@ export default function KalhareHome() {
   const heroScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.12]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const heroVideoRef = usePingPongVideo();
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
 
       {/* â”€â”€ HERO â”€â”€ */}
-      <section ref={heroRef} className="relative h-screen overflow-hidden bg-navy-950">
+      <section ref={heroRef} className="relative min-h-screen overflow-hidden bg-navy-950">
         <motion.div style={{ scale: heroScale, y: heroY }} className="absolute inset-0">
-          <img src="/images/kalhare/hero.jpeg" alt="Kalhare Transformer" className="w-full h-full object-cover" />
+          <video
+            ref={heroVideoRef}
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/videos/kalhare-transformer-exploded.mp4" type="video/mp4" />
+          </video>
         </motion.div>
 
         <div className="absolute inset-0 bg-linear-to-r from-navy-950/95 via-navy-950/70 to-navy-950/20" />
@@ -54,7 +130,7 @@ export default function KalhareHome() {
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 h-full flex flex-col justify-center px-6 md:px-16 max-w-7xl mx-auto"
+          className="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-16 max-w-7xl mx-auto py-28"
         >
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -66,46 +142,46 @@ export default function KalhareHome() {
             <p className="text-gold/70 text-xs tracking-[0.5em] uppercase font-body">KALHARE ENTERPRISES · BANGALORE</p>
           </motion.div>
 
-          <div className="overflow-hidden mb-2">
+          <div className="overflow-hidden" style={{ fontSize: HERO_FONT, marginBottom: `calc(0.5rem - ${HERO_CLIP_PAD * 2}em)` }}>
             <motion.h1
               initial={{ y: "100%", filter: "blur(8px)" }}
               animate={{ y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } }}
               transition={{ delay: 0.6, duration: 1, ease: EASE }}
               className="font-heading font-bold text-white leading-[1.05] sm:leading-[0.95]"
-              style={{ fontSize: "clamp(2.25rem, 9vw, 9rem)" }}
+              style={{ fontSize: HERO_FONT, paddingTop: `${HERO_CLIP_PAD}em`, paddingBottom: `${HERO_CLIP_PAD}em` }}
             >
               Engineering
             </motion.h1>
           </div>
-          <div className="overflow-hidden mb-2">
+          <div className="overflow-hidden" style={{ fontSize: HERO_FONT, marginBottom: `calc(0.5rem - ${HERO_CLIP_PAD * 2}em)` }}>
             <motion.h1
               initial={{ y: "100%", filter: "blur(8px)" }}
               animate={{ y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } }}
               transition={{ delay: 0.75, duration: 1, ease: EASE }}
               className="font-heading font-bold italic text-gold leading-[1.05] sm:leading-[0.95]"
-              style={{ fontSize: "clamp(2.25rem, 9vw, 9rem)" }}
+              style={{ fontSize: HERO_FONT, paddingTop: `${HERO_CLIP_PAD}em`, paddingBottom: `${HERO_CLIP_PAD}em` }}
             >
               Power.
             </motion.h1>
           </div>
-          <div className="overflow-hidden mb-2">
+          <div className="overflow-hidden" style={{ fontSize: HERO_FONT, marginBottom: `calc(0.5rem - ${HERO_CLIP_PAD * 2}em)` }}>
             <motion.h1
               initial={{ y: "100%", filter: "blur(8px)" }}
               animate={{ y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } }}
               transition={{ delay: 0.9, duration: 1, ease: EASE }}
               className="font-heading font-bold text-white/50 leading-[1.05] sm:leading-[0.95]"
-              style={{ fontSize: "clamp(2.25rem, 9vw, 9rem)" }}
+              style={{ fontSize: HERO_FONT, paddingTop: `${HERO_CLIP_PAD}em`, paddingBottom: `${HERO_CLIP_PAD}em` }}
             >
               Building
             </motion.h1>
           </div>
-          <div className="overflow-hidden mb-10">
+          <div className="overflow-hidden" style={{ fontSize: HERO_FONT, marginBottom: `calc(2.5rem - ${HERO_CLIP_PAD * 2}em)` }}>
             <motion.h1
               initial={{ y: "100%", filter: "blur(8px)" }}
               animate={{ y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } }}
               transition={{ delay: 1.02, duration: 1, ease: EASE }}
               className="font-heading font-bold text-white/50 leading-[1.05] sm:leading-[0.95]"
-              style={{ fontSize: "clamp(2.25rem, 9vw, 9rem)" }}
+              style={{ fontSize: HERO_FONT, paddingTop: `${HERO_CLIP_PAD}em`, paddingBottom: `${HERO_CLIP_PAD}em` }}
             >
               Trust.
             </motion.h1>
@@ -189,7 +265,7 @@ export default function KalhareHome() {
             </h2>
             <div className="w-16 h-px bg-gold mt-8 mb-6" />
             <p className="text-white/40 font-body font-light text-base leading-relaxed max-w-lg">
-              Core lamination, winding, insulation, impregnation, testing — all in-house at Kachohalli.
+              Core lamination, winding, insulation, impregnation, testing, all in-house at Kachohalli.
             </p>
           </motion.div>
         </div>
@@ -325,7 +401,7 @@ export default function KalhareHome() {
             {[
               { icon: <Zap size={20} />, title: "Winding Precision", desc: "Multi-layer winding with Class-H insulation. No shortcuts on core quality." },
               { icon: <ShieldCheck size={20} />, title: "IS/IEC Certified", desc: "Every transformer tested to IS 1180, IS 2026, and IEC 60076 before dispatch." },
-              { icon: <Settings size={20} />, title: "Custom Built", desc: "Non-standard ratings, special enclosures, specific voltages — we build to spec." },
+              { icon: <Settings size={20} />, title: "Custom Built", desc: "Non-standard ratings, special enclosures, specific voltages. We build to spec." },
               { icon: <Award size={20} />, title: "Indian-Made", desc: "Designed, wound, tested, and dispatched from our Bangalore facility." },
             ].map((v, i) => (
               <motion.div
@@ -378,7 +454,7 @@ export default function KalhareHome() {
               Your specification. Our precision. Delivered.
             </motion.h2>
             <motion.p {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.2 }} className="text-ink/55 font-body font-light text-base leading-relaxed mb-8">
-              Non-standard KVA ratings, special voltages, custom enclosures, dual outputs — our engineering team builds to your exact requirement and delivers a full engineering quotation within 48 hours.
+              Non-standard KVA ratings, special voltages, custom enclosures, dual outputs. Our engineering team builds to your exact requirement and delivers a full engineering quotation within 48 hours.
             </motion.p>
             <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.3 }}>
               <Link to="/kalhare/custom" className="inline-flex items-center gap-3 bg-ink text-white text-xs font-body font-semibold tracking-widest uppercase px-8 py-4 hover:bg-navy-950 transition-all duration-300">
@@ -393,7 +469,7 @@ export default function KalhareHome() {
             transition={{ duration: 0.9, ease: EASE }}
             className="aspect-4/3 overflow-hidden"
           >
-            <img src="/images/kalhare/custom-transformer.png" alt="Custom-built transformer" className="w-full h-full object-cover" />
+            <img src="/images/kalhare/custom-transformer.jpeg" alt="Custom-built transformer" className="w-full h-full object-cover" />
           </motion.div>
         </div>
       </section>

@@ -79,6 +79,14 @@ const fadeUp = {
   },
 };
 
+// Hero wordmark: leading-[0.9] is tighter than Playfair's glyph height, so the
+// overflow-hidden reveal masks clip the ascenders/descenders. We pad each line
+// inward for room, then cancel that padding with a matching negative margin so
+// the tight stacked spacing stays identical. em-based so it scales with the clamp.
+const HERO_FONT = "clamp(2.25rem, 8vw, 8rem)";
+const HERO_FONT_SM = "clamp(1.5rem, 8vw, 8rem)";
+const HERO_CLIP_PAD = 0.25; // em of room inside each reveal mask
+
 const machines = [
   {
     id: "g30",
@@ -145,7 +153,7 @@ export default function PressmachHome() {
       {/* â”€â”€ HERO VIDEO â”€â”€ */}
       <section
         ref={heroRef}
-        className="relative h-screen overflow-hidden bg-ink"
+        className="relative min-h-screen overflow-hidden bg-ink"
       >
         <motion.div style={{ scale: heroScale }} className="absolute inset-0">
           <video
@@ -169,7 +177,7 @@ export default function PressmachHome() {
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 h-full flex flex-col justify-center items-center text-center px-6"
+          className="relative z-10 min-h-screen flex flex-col justify-center items-center text-center px-6 py-28"
         >
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -180,7 +188,7 @@ export default function PressmachHome() {
             PRESSMACH MACHINE TOOLS · BANGALORE
           </motion.p>
 
-          <div className="overflow-hidden mb-3">
+          <div className="overflow-hidden" style={{ fontSize: HERO_FONT, marginBottom: `calc(0.75rem - ${HERO_CLIP_PAD * 2}em)` }}>
             <motion.h1
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -190,12 +198,12 @@ export default function PressmachHome() {
                 ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               className="font-heading font-bold text-white leading-[0.9]"
-              style={{ fontSize: "clamp(2.25rem, 8vw, 8rem)" }}
+              style={{ fontSize: HERO_FONT, paddingTop: `${HERO_CLIP_PAD}em`, paddingBottom: `${HERO_CLIP_PAD}em` }}
             >
               Precision
             </motion.h1>
           </div>
-          <div className="overflow-hidden mb-3">
+          <div className="overflow-hidden" style={{ fontSize: HERO_FONT, marginBottom: `calc(0.75rem - ${HERO_CLIP_PAD * 2}em)` }}>
             <motion.h1
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -205,12 +213,12 @@ export default function PressmachHome() {
                 ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               className="font-heading font-bold italic text-gold leading-[0.9]"
-              style={{ fontSize: "clamp(2.25rem, 8vw, 8rem)" }}
+              style={{ fontSize: HERO_FONT, paddingTop: `${HERO_CLIP_PAD}em`, paddingBottom: `${HERO_CLIP_PAD}em` }}
             >
               Engineered.
             </motion.h1>
           </div>
-          <div className="overflow-hidden mb-3">
+          <div className="overflow-hidden" style={{ fontSize: HERO_FONT, marginBottom: `calc(0.75rem - ${HERO_CLIP_PAD * 2}em)` }}>
             <motion.h1
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -220,12 +228,12 @@ export default function PressmachHome() {
                 ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               className="font-heading font-bold text-white/80 leading-[0.9]"
-              style={{ fontSize: "clamp(2.25rem, 8vw, 8rem)" }}
+              style={{ fontSize: HERO_FONT, paddingTop: `${HERO_CLIP_PAD}em`, paddingBottom: `${HERO_CLIP_PAD}em` }}
             >
               Built for
             </motion.h1>
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden" style={{ fontSize: HERO_FONT_SM, marginBottom: `-${HERO_CLIP_PAD}em` }}>
             <motion.h1
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -235,7 +243,7 @@ export default function PressmachHome() {
                 ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               className="font-heading font-bold text-white/80 leading-[0.9]"
-              style={{ fontSize: "clamp(1.5rem, 8vw, 8rem)" }}
+              style={{ fontSize: HERO_FONT_SM, paddingTop: `${HERO_CLIP_PAD}em`, paddingBottom: `${HERO_CLIP_PAD}em` }}
             >
               Manufacturing.
             </motion.h1>
@@ -248,7 +256,7 @@ export default function PressmachHome() {
             className="text-white/40 font-body font-light text-base md:text-lg max-w-2xl mt-8 leading-relaxed"
           >
             Die-Sinking EDM machines built in Bangalore. Engineered for Indian
-            manufacturing conditions — accuracy, uptime, and total cost of
+            manufacturing conditions: accuracy, uptime, and total cost of
             ownership.
           </motion.p>
 
@@ -481,8 +489,8 @@ export default function PressmachHome() {
               className="text-white/50 font-body font-light text-lg leading-relaxed mb-6"
             >
               Pressmach machines are designed for Indian manufacturing
-              conditions. Every component — from the Stepper and servo Z-axis
-              to the dielectric system — is engineered for reliability in
+              conditions. Every component, from the Stepper and servo Z-axis
+              to the dielectric system, is engineered for reliability in
               continuous production environments.
             </motion.p>
             <motion.p
@@ -652,7 +660,7 @@ export default function PressmachHome() {
               className="text-white/40 font-body font-light text-base leading-relaxed mb-8"
             >
               Special table dimensions, dielectric variants, modified servo
-              systems, or custom control interfaces — our engineering team
+              systems, or custom control interfaces. Our engineering team
               builds to your exact manufacturing requirements.
             </motion.p>
             <motion.div

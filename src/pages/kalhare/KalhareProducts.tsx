@@ -19,8 +19,8 @@ const categories = [
     products: [
       { name: "Step-Up Transformers", spec: "Voltage stepping for generators, UPS, and distribution networks." },
       { name: "Step-Down Transformers", spec: "Safe voltage reduction for industrial machinery and equipment." },
-      { name: "Single Phase Transformers", spec: "0.5 KVA – 500 KVA. Residential, commercial, and light industrial use." },
-      { name: "Three Phase Transformers", spec: "5 KVA – 2000 KVA. Heavy industrial and infrastructure applications." },
+      { name: "Single Phase Transformers", spec: "0.5 KVA to 500 KVA. Residential, commercial, and light industrial use." },
+      { name: "Three Phase Transformers", spec: "5 KVA to 2000 KVA. Heavy industrial and infrastructure applications." },
       { name: "High Voltage Transformers", spec: "Up to 11 KV. Substation and distribution applications." },
     ],
   },

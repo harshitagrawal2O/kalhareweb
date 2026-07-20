@@ -75,8 +75,8 @@ export default function AdminPage() {
       }
     } catch (e) {
       setErrorMsg(e instanceof SyntaxError
-        ? "API unreachable — add DATABASE_URL in Vercel → Settings → Environment Variables, then redeploy."
-        : "Network error — check connection.");
+        ? "API unreachable. Add DATABASE_URL in Vercel → Settings → Environment Variables, then redeploy."
+        : "Network error. Check connection.");
       setSaveState("error");
     }
     setSaving(false);
@@ -253,7 +253,7 @@ export default function AdminPage() {
                   {records.map((r, i) => (
                     <tr key={r.id} className={`border-b border-white/5 hover:bg-white/3 transition-colors ${i % 2 !== 0 ? "bg-white/1" : ""}`}>
                       <td className="px-5 py-4 font-body font-mono text-white whitespace-nowrap">{r.barcode_id}</td>
-                      <td className="px-5 py-4 text-white/45 font-body">{r.label || <span className="text-white/20">—</span>}</td>
+                      <td className="px-5 py-4 text-white/45 font-body">{r.label || <span className="text-white/20">-</span>}</td>
                       <td className="px-5 py-4">
                         <a href={r.drive_link} target="_blank" rel="noreferrer"
                           className="flex items-center gap-1.5 text-gold/60 hover:text-gold text-xs font-body transition-colors max-w-[220px] truncate">

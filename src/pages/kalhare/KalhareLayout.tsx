@@ -147,7 +147,7 @@ function KalhareFooter() {
           <div>
             <p className="text-gold/50 text-xs tracking-[0.3em] uppercase font-body mb-5">Contact</p>
             <div className="space-y-3 text-sm font-body font-light text-white/35 leading-relaxed">
-              <p>No. 9/2, Kachohalli,<br />Off Magadi Road,<br />Bangalore – 560091</p>
+              <p>No. 9/2, Kachohalli,<br />Off Magadi Road,<br />Bangalore 560091</p>
               <p>+91 9008189732</p>
               <p>kalhare@gmail.com</p>
               <p className="font-mono text-xs text-white/20 pt-1">GSTIN: 29ABZPT8409Q1Z3</p>

@@ -42,7 +42,7 @@ export default function PressmachContact() {
             Talk to Our Engineering Team.
           </motion.h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="text-white/35 font-body font-light text-base leading-relaxed">
-            Machine enquiries, technical questions, site visits, or quotations — we're available and ready to help.
+            Machine enquiries, technical questions, site visits, or quotations. We're available and ready to help.
           </motion.p>
         </div>
       </section>
@@ -63,11 +63,11 @@ export default function PressmachContact() {
                 {
                   icon: <MapPin size={18} className="text-gold flex-shrink-0 mt-0.5" />,
                   label: "Factory & Showroom",
-                  content: "No. 9/2, Kalhare Industrial Area,\nKachohalli, Off Magadi Road,\nBangalore – 560091",
+                  content: "No. 9/2, Kalhare Industrial Area,\nKachohalli, Off Magadi Road,\nBangalore 560091",
                 },
                 { icon: <Phone size={18} className="text-gold flex-shrink-0" />, label: "Phone", content: "+91 9008189732" },
                 { icon: <Mail size={18} className="text-gold flex-shrink-0" />, label: "Email", content: "kalhare@gmail.com" },
-                { icon: <Clock size={18} className="text-gold flex-shrink-0" />, label: "Working Hours", content: "Monday – Saturday\n9:00 AM – 6:00 PM IST" },
+                { icon: <Clock size={18} className="text-gold flex-shrink-0" />, label: "Working Hours", content: "Monday to Saturday\n9:00 AM to 6:00 PM IST" },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
@@ -140,7 +140,7 @@ export default function PressmachContact() {
                 </div>
                 <h3 className="font-heading font-bold text-white text-2xl mb-3">Message Received</h3>
                 <p className="text-white/35 font-body font-light text-sm leading-relaxed">
-                  Thank you for reaching out. Our engineering team will respond within 1–2 business days.
+                  Thank you for reaching out. Our engineering team will respond within 1 to 2 business days.
                 </p>
               </motion.div>
             ) : (

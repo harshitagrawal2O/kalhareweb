@@ -31,11 +31,11 @@ const machines: Machine[] = [
     tagline: "Precision in a compact frame.",
     heroImage: "/images/pressmach/g30-green.jpeg",
     gallery: ["/images/pressmach/g30-green.jpeg", "/images/pressmach/g30-red.jpeg", "/images/pressmach/g30-green2.jpeg"],
-    description: "The G-30(i) is Pressmach's entry-level Die-Sinking EDM — designed for small tool rooms, training centres, and workshops transitioning from manual to EDM-based toolmaking. It offers industrial-grade accuracy in the most compact footprint in our lineup.",
+    description: "The G-30(i) is Pressmach's entry-level Die-Sinking EDM, designed for small tool rooms, training centres, and workshops transitioning from manual to EDM-based toolmaking. It offers industrial-grade accuracy in the most compact footprint in our lineup.",
     highlights: [
       "Servo Z-axis with digital depth control",
       "Integrated flush system with flow regulation",
-      "Compact footprint — suits limited floor space",
+      "Compact footprint that suits limited floor space",
       "Easy operator interface, minimal training required",
       "Compatible with most EDM oils",
     ],
@@ -59,7 +59,7 @@ const machines: Machine[] = [
     tagline: "The most versatile machine in the lineup.",
     heroImage: "/images/pressmach/g45-yellow.jpeg",
     gallery: ["/images/pressmach/g45-yellow.jpeg", "/images/pressmach/cnc-semi.jpeg", "/images/pressmach/control-panel.jpeg"],
-    description: "The G-45(i) targets the broad middle of the precision tooling market — medium-complexity moulds, punch-die work, and production cavity sinking. It combines a larger work envelope with the same servo Z-axis accuracy as the G-60, making it the natural choice for shops that outgrew the G-30.",
+    description: "The G-45(i) targets the broad middle of the precision tooling market: medium-complexity moulds, punch-die work, and production cavity sinking. It combines a larger work envelope with the same servo Z-axis accuracy as the G-60, making it the natural choice for shops that outgrew the G-30.",
     highlights: [
       "Servo Z-axis with programmable cycle memory",
       "Larger work tank for mid-size moulds and blocks",
@@ -87,7 +87,7 @@ const machines: Machine[] = [
     tagline: "Full-scale. Full-precision. Built for production.",
     heroImage: "/images/pressmach/g60-studio.jpeg",
     gallery: ["/images/pressmach/g60-studio.jpeg", "/images/pressmach/g60-yellow.jpeg", "/images/pressmach/g60-black.jpeg"],
-    description: "The G-60(i) is Pressmach's flagship machine — built for production tool rooms, die-casting mould makers, and precision component manufacturers who demand the highest surface quality, the tightest tolerances, and consistent repeatability across high run volumes. The G-60(i) is the benchmark against which we measure everything else we build.",
+    description: "The G-60(i) is Pressmach's flagship machine, built for production tool rooms, die-casting mould makers, and precision component manufacturers who demand the highest surface quality, the tightest tolerances, and consistent repeatability across high run volumes. The G-60(i) is the benchmark against which we measure everything else we build.",
     highlights: [
       "Full semi-CNC servo with cycle programming and memory",
       "Advanced generator with micro-pulse capability",
@@ -115,7 +115,7 @@ const machines: Machine[] = [
     tagline: "When the job simply won't fit anything else.",
     heroImage: "/images/pressmach/awesome-1500.jpeg",
     gallery: ["/images/pressmach/awesome-1500.jpeg", "/images/pressmach/factory-floor.jpeg"],
-    description: "The AWESOME-1500 is Pressmach's large-format EDM — built for oversized moulds, die blocks, and components that exceed the working envelope of standard machines. It retains the same servo-driven precision architecture as the G-60(i) but in a significantly larger structural frame.",
+    description: "The AWESOME-1500 is Pressmach's large-format EDM, built for oversized moulds, die blocks, and components that exceed the working envelope of standard machines. It retains the same servo-driven precision architecture as the G-60(i) but in a significantly larger structural frame.",
     highlights: [
       "Extra-large work tank for jumbo moulds and die blocks",
       "Full semi-CNC servo system",
@@ -152,7 +152,7 @@ function MachineCard({ m, index }: { m: Machine; index: number }) {
           <span className="text-white/20 font-body text-xs tracking-[0.4em] uppercase">
             {String(index + 1).padStart(2, "0")} / {String(machines.length).padStart(2, "0")}
           </span>
-          <span className="text-white/10 mx-3">—</span>
+          <span className="text-white/10 mx-3">·</span>
           <span className="text-gold/50 font-body text-xs tracking-[0.3em] uppercase">{m.series}</span>
         </motion.div>
 

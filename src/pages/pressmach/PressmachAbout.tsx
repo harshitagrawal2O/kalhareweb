@@ -165,7 +165,7 @@ export default function PressmachAbout() {
               transition={{ ...fadeUp.transition, delay: 0.2 }}
               className="text-white/50 font-body font-light text-lg leading-relaxed mb-6"
             >
-              Pressmach Machine Tools is a division of Kalhare Group — a
+              Pressmach Machine Tools is a division of Kalhare Group, a
               Bangalore-based engineering group with a track record built over
               three decades of precision manufacturing. We build Die-Sinking EDM
               machines for Indian tool rooms, mould makers, and precision
@@ -188,7 +188,7 @@ export default function PressmachAbout() {
               className="text-white/35 font-body font-light text-base leading-relaxed"
             >
               We serve tool rooms, MSME manufacturers, automotive component
-              suppliers, and defence sub-contractors across India — customers
+              suppliers, and defence sub-contractors across India, customers
               who need micron-level accuracy without the overhead of imported
               machine support.
             </motion.p>

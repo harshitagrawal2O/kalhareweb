@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Machines", href: "/pressmach/machines" },
   { label: "Custom Machines", href: "/pressmach/custom" },
   { label: "Contact", href: "/pressmach/contact" },
+  { label: "Test Product", href: "/pressmach/testproduct" },
 ];
 
 function PressmachNav() {
@@ -123,7 +124,7 @@ function PressmachFooter() {
               </div>
             </div>
             <p className="text-white/35 font-body font-light text-sm leading-relaxed max-w-xs">
-              Precision EDM machine tools engineered for modern manufacturing. Accuracy, reliability, and productive uptime — designed into every unit.
+              Precision EDM machine tools engineered for modern manufacturing. Accuracy, reliability, and productive uptime, designed into every unit.
             </p>
             <div className="gold-line mt-8 w-24" />
           </div>
@@ -140,7 +141,7 @@ function PressmachFooter() {
           <div>
             <p className="text-gold/60 text-xs tracking-[0.3em] uppercase font-body mb-5">Contact</p>
             <div className="space-y-3 text-sm font-body font-light text-white/40 leading-relaxed">
-              <p>No. 9/2, Kalhare Industrial Area,<br />Kachohalli, Off Magadi Road,<br />Bangalore – 560091</p>
+              <p>No. 9/2, Kalhare Industrial Area,<br />Kachohalli, Off Magadi Road,<br />Bangalore 560091</p>
               <p>+91 9008189732</p>
               <p>kalhare@gmail.com</p>
             </div>
